@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Bosco - EARadio</title>
+    <link rel="stylesheet" href="sitoport__CSS__.css">
+    <style>
+        /* Override specifici per DJBosco */
+        header h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, #ff8c00, #ffd700);
+        }
+        .player {
+            background-color: var(--grigio-chiaro);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .player h2 {
+            color: var(--giallo);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .controls button {
+            background: linear-gradient(90deg, var(--rosso), var(--giallo));
+            color: var(--nero);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .controls button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 100, 0, 0.4);
+        }
+        .now-playing {
+            text-align: center;
+            margin: 15px 0;
+            font-style: italic;
+            color: var(--arancio);
+        }
+        /* Fissa il pulsante nei progetti */
+        .progetto-content a {
+            position: relative;
+            z-index: 4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DJ Bosco</h1>
+        <p>La tua radio preferita - Streaming 24/7</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="sitoPortfolio.html">Torna al Portfolio</a></li>
+            <li><a href="#player">Player</a></li>
+            <li><a href="#programmi">Programmi</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="player">
+            <h2>Ascolta Ora</h2>
+            <div class="player">
+                <h2>Player Live</h2>
+                <div class="now-playing">
+                    <p>In onda: <strong>Mix del Giorno</strong></p>
+                </div>
+                <div class="controls">
+                    <button onclick="playRadio()">▶ Play</button>
+                    <button onclick="stopRadio()">⏹ Stop</button>
+                    <button onclick="volumeUp()">🔊+</button>
+                </div>
+                <p style="text-align: center; margin-top: 15px; font-size: 0.9rem;">
+                    Frequenza: 102.5 FM | Online
+                </p>
+            </div>
+        </section>
+
+        <section id="programmi">
+            <h2>Programmi in Onda</h2>
+            <div class="progetti">
+                <div class="progetto">
+                    <div class="progetto-content">
+                        <h3>Mattina Energica</h3>
+                        <p>Dalle 8:00 alle 12:00</p>
+                        <a href="#">Ascolta ora</a>
+                    </div>
+                    <div class="progetto-dettagli">
+                        <p><strong>Descrizione:</strong> Musica per iniziare la giornata con energia!</p>
+                        <p><strong>DJ:</strong> DJ Bosco</p>
+                    </div>
+                </div>
+                <div class="progetto">
+                    <div class="progetto-content">
+                        <h3>Pomeriggio Relax</h3>
+                        <p>Dalle 14:00 alle 18:00</p>
+                        <a href="#">Ascolta ora</a>
+                    </div>
+                    <div class="progetto-dettagli">
+                        <p><strong>Descrizione:</strong> Brani rilassanti per il pomeriggio.</p>
+                        <p><strong>DJ:</strong> DJ Lucy</p>
+                    </div>
+                </div>
+                <div class="progetto">
+                    <div class="progetto-content">
+                        <h3>Serata Dance</h3>
+                        <p>Dalle 20:00 alle 24:00</p>
+                        <a href="#">Ascolta ora</a>
+                    </div>
+                    <div class="progetto-dettagli">
+                        <p><strong>Descrizione:</strong> La migliore musica dance per ballare!</p>
+                        <p><strong>DJ:</strong> DJ Mark</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 DJ Bosco - EARadio. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        function playRadio() {
+            alert("Radio in riproduzione! (Simulazione)");
+        }
+        function stopRadio() {
+            alert("Radio fermata!");
+        }
+        function volumeUp() {
+            alert("Volume aumentato!");
+        }
+    </script>
+</body>
+</html>
