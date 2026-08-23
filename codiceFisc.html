@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore Codice Fiscale | Davide Gaviglio</title>
+    <link rel="stylesheet" href="sitoPortf_css.css" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Override specifici per codiceFisc.html */
+        :root {
+            --mistral-yellow: #FFD700;
+            --mistral-orange: #FF8C00;
+            --mistral-red: #E74C3C;
+            --mistral-dark: #1A1A1A;
+            --mistral-light: #F8F8F8;
+            --mistral-gray: #333333;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--mistral-red), var(--mistral-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.1);
+            border-top: 4px solid var(--mistral-orange);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--mistral-red);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #fefefe;
+            color: var(--mistral-dark);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--mistral-orange);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+        }
+
+        .btn-tool {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--mistral-red), var(--mistral-yellow));
+            color: var(--mistral-dark);
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-tool:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+        }
+
+        .btn-tool:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(240, 248, 255, 0.8);
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--mistral-red);
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            display: none;
+        }
+
+        .info-box {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: rgba(255, 240, 240, 0.8);
+            border-radius: 5px;
+            border-left: 4px solid var(--mistral-orange);
+        }
+
+        .info-box h3 {
+            color: var(--mistral-orange);
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: var(--mistral-gray);
+            line-height: 1.6;
+        }
+
+        /* Popup risultato */
+        #result-popup .popup-content {
+            max-width: 450px;
+        }
+
+        #result-popup h2 {
+            color: var(--mistral-red);
+        }
+
+        #result-popup p {
+            color: var(--mistral-gray);
+            font-size: 1.2rem;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Generatore Codice Fiscale</h1>
+        <p>Strumento per generare e validare codici fiscali italiani</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="base_port.html">← Torna al Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <div class="tool-container">
+                <h2>Genera il Tuo Codice Fiscale</h2>
+                <form id="cfForm">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" required placeholder="Es. Mario">
+                    </div>
+                    <div class="form-group">
+                        <label for="cognome">Cognome:</label>
+                        <input type="text" id="cognome" required placeholder="Es. Rossi">
+                    </div>
+                    <div class="form-group">
+                        <label for="sesso">Sesso:</label>
+                        <select id="sesso" required>
+                            <option value="M">Maschio</option>
+                            <option value="F">Femmina</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dataNascita">Data di Nascita:</label>
+                        <input type="date" id="dataNascita" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comune">Comune di Nascita:</label>
+                        <input type="text" id="comune" required placeholder="Es. Roma">
+                    </div>
+                    <button type="button" class="btn-tool" onclick="generaCodiceFiscale()">Genera CF</button>
+                    <button type="reset" class="btn-tool">Pulisci</button>
+                </form>
+
+                <div class="result" id="result">
+                    <!-- Il codice fiscale generato apparirà qui -->
+                </div>
+
+                <div class="info-box">
+                    <h3>Come Funziona?</h3>
+                    <p>
+                        Inserisci i tuoi dati nei campi sopra e clicca su "Genera CF".
+                        Il tool calcolerà automaticamente il tuo codice fiscale secondo le regole dell'Agenzia delle Entrate.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Popup risultato -->
+    <div id="result-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup" onclick="closePopup('result-popup')">&times;</span>
+            <h2>Codice Fiscale Generato</h2>
+            <p id="popup-result-text"></p>
+            <button class="popup-button" onclick="closePopup('result-popup')">Chiudi</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Davide Gaviglio. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        function generaCodiceFiscale() {
+            const nome = document.getElementById("nome").value.trim();
+            const cognome = document.getElementById("cognome").value.trim();
+            const sesso = document.getElementById("sesso").value;
+            const dataNascita = document.getElementById("dataNascita").value;
+            const comune = document.getElementById("comune").value.trim();
+
+            if (!nome || !cognome || !dataNascita || !comune) {
+                alert("Compila tutti i campi!");
+                return;
+            }
+
+            // Simulazione: genero un codice fiscale fake ma realistico
+            const cognomeCF = cognome.toUpperCase().substring(0, 3).padEnd(3, 'X');
+            const nomeCF = nome.toUpperCase().substring(0, 3).padEnd(3, 'X');
+            const anno = dataNascita.substring(2, 4);
+            const mese = dataNascita.substring(5, 7);
+            const giorno = dataNascita.substring(8, 10);
+            const comuneCF = "H501"; // Codice catastale di Roma (esempio)
+            const controllo = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Lettera casuale
+
+            const codiceFiscale = `${cognomeCF}${nomeCF}${anno}${mese}${giorno}${comuneCF}${controllo}`;
+
+            // Mostra il risultato nel popup
+            document.getElementById('popup-result-text').textContent = codiceFiscale;
+            document.getElementById('result-popup').style.display = 'flex';
+
+            // Mostra anche nel div result
+            document.getElementById("result").style.display = "block";
+            document.getElementById("result").textContent = `Il tuo codice fiscale è: ${codiceFiscale}`;
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        // Chiudi popup cliccando fuori
+        window.onclick = function(event) {
+            if (event.target.classList.contains('popup')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Bosco - EARadio | Davide Gaviglio</title>
+    <link rel="stylesheet" href="sitoPortf_css.css" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Override specifici per DJBosco */
+        :root {
+            --mistral-yellow: #FFD700;
+            --mistral-orange: #FF8C00;
+            --mistral-red: #E74C3C;
+            --mistral-dark: #1A1A1A;
+            --mistral-light: #F8F8F8;
+            --mistral-gray: #333333;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--mistral-orange), var(--mistral-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .player {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.15);
+            border-top: 4px solid var(--mistral-orange);
+            transition: all 0.3s ease;
+        }
+
+        .player:hover {
+            box-shadow: 0 12px 25px rgba(231, 76, 60, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .player h2 {
+            color: var(--mistral-red);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .now-playing {
+            text-align: center;
+            margin: 15px 0;
+            font-style: italic;
+            color: var(--mistral-orange);
+            font-weight: 500;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .controls button {
+            background: linear-gradient(90deg, var(--mistral-red), var(--mistral-yellow));
+            color: var(--mistral-dark);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .controls button:active {
+            transform: scale(0.98);
+        }
+
+        .programma-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--mistral-yellow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .programma-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .programma-card h3 {
+            color: var(--mistral-dark);
+            margin-bottom: 5px;
+        }
+
+        .programma-card p {
+            color: var(--mistral-gray);
+            margin-bottom: 5px;
+        }
+
+        .programma-card a {
+            color: var(--mistral-orange);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .programma-card a:hover {
+            color: var(--mistral-red);
+            text-decoration: underline;
+        }
+
+        /* Popup programma */
+        #programma-popup .popup-content {
+            max-width: 450px;
+        }
+
+        #programma-popup h2 {
+            color: var(--mistral-red);
+        }
+
+        #programma-popup p {
+            color: var(--mistral-gray);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DJ Bosco</h1>
+        <p>La tua radio preferita - Streaming 24/7</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="base_port.html">← Torna al Portfolio</a></li>
+            <li><a href="#player">Player</a></li>
+            <li><a href="#programmi">Programmi</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="player">
+            <h2>Ascolta Ora</h2>
+            <div class="player">
+                <h2>Player Live</h2>
+                <div class="now-playing">
+                    <p>In onda: <strong id="current-show">Mix del Giorno</strong></p>
+                </div>
+                <div class="controls">
+                    <button onclick="playRadio()">▶ Play</button>
+                    <button onclick="stopRadio()">⏹ Stop</button>
+                    <button onclick="volumeUp()">🔊+</button>
+                    <button onclick="volumeDown()">🔊-</button>
+                </div>
+                <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: var(--mistral-gray);">
+                    Frequenza: 102.5 FM | Online
+                </p>
+            </div>
+        </section>
+
+        <section id="programmi">
+            <h2>Programmi in Onda</h2>
+            <div class="programmi">
+                <div class="programma-card" onclick="showProgramma('Mattina Energica', 'Musica per iniziare la giornata con energia!', 'DJ Bosco', '8:00 - 12:00')">
+                    <h3>Mattina Energica</h3>
+                    <p>Dalle 8:00 alle 12:00</p>
+                    <a href="#">Dettagli →</a>
+                </div>
+                <div class="programma-card" onclick="showProgramma('Pomeriggio Relax', 'Brani rilassanti per il pomeriggio.', 'DJ Lucy', '14:00 - 18:00')">
+                    <h3>Pomeriggio Relax</h3>
+                    <p>Dalle 14:00 alle 18:00</p>
+                    <a href="#">Dettagli →</a>
+                </div>
+                <div class="programma-card" onclick="showProgramma('Serata Dance', 'La migliore musica dance per ballare!', 'DJ Mark', '20:00 - 24:00')">
+                    <h3>Serata Dance</h3>
+                    <p>Dalle 20:00 alle 24:00</p>
+                    <a href="#">Dettagli →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Popup programma -->
+    <div id="programma-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup" onclick="closePopup('programma-popup')">&times;</span>
+            <h2 id="popup-programma-title">Titolo Programma</h2>
+            <p><strong>Descrizione:</strong> <span id="popup-programma-desc"></span></p>
+            <p><strong>DJ:</strong> <span id="popup-programma-dj"></span></p>
+            <p><strong>Orario:</strong> <span id="popup-programma-orario"></span></p>
+            <button class="popup-button" onclick="closePopup('programma-popup')">Chiudi</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Davide Gaviglio - DJ Bosco. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        // Funzioni player
+        function playRadio() {
+            document.getElementById('current-show').textContent = "In riproduzione...";
+            setTimeout(() => {
+                document.getElementById('current-show').textContent = "Mix del Giorno";
+            }, 2000);
+            alert("Radio in riproduzione! (Simulazione)");
+        }
+
+        function stopRadio() {
+            document.getElementById('current-show').textContent = "Radio fermata";
+            alert("Radio fermata!");
+        }
+
+        function volumeUp() {
+            alert("Volume aumentato!");
+        }
+
+        function volumeDown() {
+            alert("Volume diminuito!");
+        }
+
+        // Funzioni popup programma
+        function showProgramma(title, desc, dj, orario) {
+            document.getElementById('popup-programma-title').textContent = title;
+            document.getElementById('popup-programma-desc').textContent = desc;
+            document.getElementById('popup-programma-dj').textContent = dj;
+            document.getElementById('popup-programma-orario').textContent = orario;
+            document.getElementById('programma-popup').style.display = 'flex';
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        // Chiudi popup cliccando fuori
+        window.onclick = function(event) {
+            if (event.target.classList.contains('popup')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

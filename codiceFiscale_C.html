@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codice Fiscale in C - Davide Gaviglio</title>
+    <link rel="stylesheet" href="sitoPortf_css.css" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Override specifici per codiceFiscale_C.html */
+        :root {
+            --mistral-yellow: #FFD700;
+            --mistral-orange: #FF8C00;
+            --mistral-red: #E74C3C;
+            --mistral-dark: #1A1A1A;
+            --mistral-light: #F8F8F8;
+            --mistral-gray: #333333;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--mistral-orange), var(--mistral-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .descrizione {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--mistral-orange);
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .feature {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--mistral-yellow);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature h3 {
+            color: var(--mistral-red);
+            margin-bottom: 10px;
+        }
+
+        .feature ul {
+            padding-left: 20px;
+        }
+
+        .feature li {
+            margin-bottom: 8px;
+            color: var(--mistral-gray);
+        }
+
+        .codice {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--mistral-red);
+        }
+
+        .codice pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .codice code {
+            color: #f8f8f2;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back a {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--mistral-red), var(--mistral-yellow));
+            color: var(--mistral-dark);
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .back a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+        }
+
+        /* Popup GitHub */
+        #github-popup .popup-content {
+            max-width: 450px;
+        }
+
+        #github-popup h2 {
+            color: var(--mistral-red);
+        }
+
+        #github-popup p {
+            color: var(--mistral-gray);
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Codice Fiscale in C</h1>
+        <p>Progetto di programmazione in linguaggio C</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="base_port.html">← Torna al Portfolio</a></li>
+            <li><a href="#progetto">Progetto</a></li>
+            <li><a href="codiceFisc.html">Prova il Generatore</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="progetto">
+            <h2>Codice Fiscale in C</h2>
+
+            <div class="descrizione">
+                <p><strong>Questo programma</strong>, scritto interamente in linguaggio C, calcola il codice fiscale italiano partendo dai dati inseriti dall'utente (cognome, nome, data di nascita, sesso e codice catastale del comune di nascita).</p>
+                <p>Utilizza funzioni per la gestione dei file (per eventuali salvataggi) e puntatori per manipolare le stringhe in modo efficiente.</p>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <h3>✔ Cosa fa il programma</h3>
+                    <ul>
+                        <li>Estrae le consonanti (e vocali se necessario) da cognome e nome</li>
+                        <li>Calcola anno, mese (con lettera corrispondente) e giorno di nascita</li>
+                        <li>Gestisce correttamente il sesso (per le donne aggiunge 40 al giorno)</li>
+                        <li>Inserisce il codice catastale del comune</li>
+                        <li>Calcola automaticamente la <strong>lettera di controllo</strong> (16º carattere)</li>
+                    </ul>
+                </div>
+                <div class="feature">
+                    <h3>✔ Tecnologie utilizzate</h3>
+                    <ul>
+                        <li>Linguaggio C puro</li>
+                        <li>Gestione di stringhe e puntatori</li>
+                        <li>Funzioni di input/output da file</li>
+                        <li>Algoritmo ufficiale del Ministero delle Finanze</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 30px;">Codice sorgente principale</h3>
+            <div class="codice">
+                <pre><code>
+do {
+    printf("Inserire il proprio cognome: ");
+    scanf("%s", cognome);
+    fcognome(cognome, codicefiscale);
+
+    printf("Inserire il proprio nome: ");
+    scanf("%s", nome);
+    fnome(nome, codicefiscale);
+
+    printf("Inserire il proprio anno di nascita: ");
+    scanf("%d", &annonascita);
+    fanno(&annonascita, codicefiscale);
+
+    printf("Inserire il proprio mese di nascita (1-12): ");
+    scanf("%d", &mesenascita);
+    fmese(&mesenascita, codicefiscale);
+
+    printf("Inserire il proprio giorno di nascita: ");
+    scanf("%d", &giornonascita);
+    printf("Inserire il proprio sesso (M/F): ");
+    scanf(" %c", &sesso);
+    fgiornosesso(&giornonascita, &sesso, codicefiscale);
+
+    fcomuni(codicefiscale);
+
+    char controllo = fcontrollo(codicefiscale);
+    codicefiscale[16] = controllo;
+
+    printf("Codice fiscale generato: %s\n", codicefiscale);
+
+    printf("Vuoi reinserire i dati? (s/n): ");
+    char risposta;
+    scanf(" %c", &risposta);
+    if (risposta != 's' && risposta != 'S') {
+        break;
+    }
+} while (1);
+                </code></pre>
+            </div>
+
+            <p style="text-align: center; margin-top: 20px; color: var(--mistral-gray);">
+                <strong>Nota:</strong> Il codice completo è disponibile sul mio GitHub.
+            </p>
+
+            <div class="back">
+                <a href="#" onclick="showGitHubPopup()">→ Visualizza il repository completo su GitHub</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Popup GitHub -->
+    <div id="github-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup" onclick="closePopup('github-popup')">&times;</span>
+            <h2>Repository GitHub</h2>
+            <p>Il codice completo del progetto "Codice Fiscale in C" è disponibile al seguente link:</p>
+            <p><strong>https://github.com/Gaviglio-Davide/CodiceFiscale-C</strong></p>
+            <a href="https://github.com/Gaviglio-Davide" target="_blank" class="popup-button" style="color: white; text-decoration: none;">Vai su GitHub →</a>
+            <button class="popup-button" onclick="closePopup('github-popup')" style="margin-top: 10px;">Chiudi</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Davide Gaviglio. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        function showGitHubPopup() {
+            document.getElementById('github-popup').style.display = 'flex';
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        // Chiudi popup cliccando fuori
+        window.onclick = function(event) {
+            if (event.target.classList.contains('popup')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
